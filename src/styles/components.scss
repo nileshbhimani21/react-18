@@ -18,4 +18,7 @@
   .btn-danger {
     @apply bg-danger text-white hover:bg-danger-hover;
   }
+  .btn-link {
+    @apply bg-transparent p-0 hover:text-primary;
+  }
 }

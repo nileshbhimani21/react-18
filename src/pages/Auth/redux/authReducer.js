@@ -5,7 +5,8 @@ import storage from 'redux-persist/lib/storage'
 const initialState = {
   isLoading: false,
   user: null,
-  authToken:null,
+  authToken: null,
+  isaAuthenticated: false
 };
 
 const persistConfig = {
@@ -22,12 +23,13 @@ const authReducer = persistReducer(persistConfig, (state = initialState, action)
         isLoading: true,
       };
     }
-    case AuthMap.LOGIN_SUCCESS: {  
+    case AuthMap.LOGIN_SUCCESS: {
       return {
         ...state,
         isLoading: false,
         user: action.payload,
-        authToken:action.payload.token
+        authToken: action.payload.token,
+        isaAuthenticated: true
       };
     }
     case AuthMap.LOGIN_ERROR: {
@@ -35,7 +37,7 @@ const authReducer = persistReducer(persistConfig, (state = initialState, action)
         ...state,
         isLoading: false,
       };
-    }  
+    }
     default:
       return { ...state };
   }

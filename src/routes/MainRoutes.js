@@ -1,15 +1,12 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import Auth from "../pages/Auth";
-import Dashboard from "../pages/Dashboard";
-import { PrivateRoute, AuthRoute } from "./PrivateRoute";
+import { useSelector } from "react-redux";
+import AuthRoute from "../pages/Auth";
+import PrivateRoute from "./PrivateRoute";
 
 const MainRoutes = () => {
+  const { isaAuthenticated } = useSelector(state => state.auth)
   return (
-    <Routes>
-      <Route exact path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-      <Route exact path="/auth" element={<AuthRoute><Auth /></AuthRoute>} />
-    </Routes>
+    isaAuthenticated ? <PrivateRoute /> : <AuthRoute />
   );
 };
 

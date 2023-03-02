@@ -1,18 +1,16 @@
-import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import DashboardLayout from '../Layout/DashboardLayout'
+import Dashboard from '../pages/Dashboard'
+import Setting from '../pages/Setting'
 
-export const PrivateRoute = ({ children }) => {
-    const { user, authToken } = useSelector((state) => state.auth)
-    if ((user === null || user === undefined) && (authToken === null || authToken === undefined)) {
-        return <Navigate to="/auth" replace />
-    }
-    return children
-}
-
-export const AuthRoute = ({ children }) => {
-    const { user, authToken } = useSelector((state) => state.auth)
-    if ((user === null || user === undefined) && (authToken === null || authToken === undefined)) {
-        return children 
-    }
-    return <Navigate to="/" replace />
+export default function PrivateRoute() {
+    return (
+        <DashboardLayout>
+            <Routes>
+                <Route exact path="/" element={<Dashboard />} />
+                <Route exact path="/setting" element={<Setting />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+        </DashboardLayout>
+    )
 }
