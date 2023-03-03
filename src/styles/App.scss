@@ -21,7 +21,7 @@ a {
   @apply flex min-h-screen;
 }
 footer {
-  @apply px-4 py-3 container bg-white text-slate-400 text-xs;
+  @apply px-6 py-3 bg-white text-slate-400 text-xs;
 }
 header {
   left: 265px;
@@ -44,7 +44,7 @@ header {
 }
 .NB_mainContent {
   min-height: calc(100vh - 40px);
-  @apply px-8 pt-20 pb-8;
+  @apply px-6 pt-20 pb-8;
 }
 .NB_sidebarOpen {
   .NB_sidebar {

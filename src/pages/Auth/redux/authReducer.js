@@ -6,7 +6,7 @@ const initialState = {
   isLoading: false,
   user: null,
   authToken: null,
-  isaAuthenticated: false
+  isaAuthenticated: true
 };
 
 const persistConfig = {

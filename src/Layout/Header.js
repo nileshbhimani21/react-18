@@ -1,8 +1,10 @@
 import React from "react";
 import DropDown from "../components/DropDown";
-import { MenuIcon } from "../components/Icons";
+import { Bars3Icon, Cog6ToothIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+    const navigate = useNavigate()
     const handleSidebar = () => {
         document.body.classList.toggle('NB_sidebarOpen');
     }
@@ -13,9 +15,9 @@ const Header = () => {
                 type="button"
                 onClick={handleSidebar}
             >
-                <MenuIcon />
+                <Bars3Icon className="h-6 w-6" />
             </button>
-            <DropDown/>
+            <DropDown menus={[{ text: "Setting", icon: <Cog6ToothIcon className="h-6 w-6 mr-2" />, onClick: () => navigate('/setting') },{ text: "Logout", icon: <ArrowLeftOnRectangleIcon className="h-6 w-6 mr-2" />, onClick: () => { } }]} text="<span>Admin</span>" btnclassName="bg-black"/>
         </header>
     </>)
 }

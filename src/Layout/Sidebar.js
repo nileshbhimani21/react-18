@@ -3,7 +3,6 @@ import { Navigation } from "react-minimal-side-navigation";
 import { useLocation, useNavigate } from "react-router-dom";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { LogoIcon } from "../components/Icons";
-// import { DashboardICon, LogoICon, SettingICon, UserICon } from "../Icons";
 
 const perfectScrollbarOptions = {
     wheelSpeed: 2,
@@ -39,12 +38,17 @@ const Sidebar = () => {
                             {
                                 title: "Dashboard",
                                 itemId: "/",
-                                // elemBefore: () => <DashboardICon />
+                                // elemBefore: () => <Cog6ToothIcon className="h-6 w-6 mr-2" />
                             },
                             {
                                 title: "Setting",
                                 itemId: "/setting",
-                                // elemBefore: () => <SettingICon />
+                                // elemBefore: () => <Cog6ToothIcon className="h-6 w-6 mr-2" />
+                            },
+                            {
+                                title: "UI",
+                                itemId: "/ui",
+                                // elemBefore: () => <Cog6ToothIcon className="h-6 w-6 mr-2" />
                             },
                             // {
                             //     title: "About",
