@@ -7,6 +7,7 @@ import Tab from '../../components/Tab'
 import { getData } from '../../utils/fetch'
 import { XMarkIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
 import { Form, Input, Select } from '../../components/Form'
+import Card from '../../components/Card'
 
 const tableConstants = ({ handleEdit, handleDelete, handleSort }) => {
   return [
@@ -116,36 +117,39 @@ export default function Ui() {
 
   return (
     <>
-      <h6>Switch</h6>
-      <Switch checked={enabled} onChange={setEnabled} />
-      <br /><br />
-      <h6>DropDown</h6>
-      <DropDown menus={[{ text: "Item 1", icon: "", onClick: () => { } }, { text: "Item 2", icon: "", onClick: () => { } }]} text="<span>Dropdown</span>" btnclassName="bg-black" />
-      <br /><br />
-      <h6>Modal</h6>
-      <button type='button' onClick={openModal} className="btn btn-primary">Modal</button>
-      <Modal isOpen={isOpen} closeModal={closeModal} title="Dialog Title">
-        <div className="mt-2">
-          <p>
-            Your payment has been successfully submitted. We’ve sent
-            you an email with all of the details of your order.
-          </p>
-        </div>
+      <Card>
+        <h6>Switch</h6>
+        <Switch checked={enabled} onChange={setEnabled} />
+        <br /><br />
+        <h6>DropDown</h6>
+        <DropDown menus={[{ text: "Item 1", icon: "", onClick: () => { } }, { text: "Item 2", icon: "", onClick: () => { } }]} text="<span>Dropdown</span>" btnclassName="bg-black" />
+        <br /><br />
+        <h6>Modal</h6>
+        <button type='button' onClick={openModal} className="btn btn-primary">Modal</button>
+        <Modal isOpen={isOpen} closeModal={closeModal} title="Dialog Title">
+          <div className="mt-2">
+            <p>
+              Your payment has been successfully submitted. We’ve sent
+              you an email with all of the details of your order.
+            </p>
+          </div>
 
-        <div className="mt-4">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={closeModal}
-          >
-            Got it, thanks!
-          </button>
-        </div>
-      </Modal>
-      <br /><br />
+          <div className="mt-4">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={closeModal}
+            >
+              Got it, thanks!
+            </button>
+          </div>
+        </Modal>
+      </Card>
+      <Card>
       <h6>Tab</h6>
       <Tab categories={categories} />
-      <br /><br />
+      </Card>
+      <Card>
       <h6>Form</h6>
       <Form onSubmit={(data) => console.log(data)}>
         <Input name="firstName" validation={{ required: true, minLength: 10 }} />
@@ -154,7 +158,7 @@ export default function Ui() {
 
         <button className='btn-primary btn'>Submit</button>
       </Form>
-      <br /><br />
+      </Card>
       <h6>Table</h6>
       <DataTable
         cols={tableConstants({ handleEdit, handleDelete, handleSort })}
