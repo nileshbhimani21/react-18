@@ -1,43 +1,25 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Input, Select } from "./FormField";
 
-export function Form({ defaultValues, children, onSubmit }) {
-    const { handleSubmit, register, formState: { errors }, reset } = useForm({ defaultValues });
-    console.log(errors, 'errors')
+export function Form() {
+    const { handleSubmit, register, formState: { errors }, reset } = useForm();
+
+    const onSubmit = (formData) => {
+        if (Object.keys(errors).length === 0) {
+            alert(formData, 'formData')
+            reset()
+        }
+    }
     return (
-        <form onSubmit={handleSubmit(() => {
-            if (Object.keys(errors).length === 0) {
-                onSubmit()
-                reset()
-            }
-        })}>
-            {Array.isArray(children)
-                ? children.map((child) => {
-                    return child.props.name
-                        ? React.createElement(child.type, {
-                            ...{
-                                ...child.props,
-                                register,
-                                key: child.props.name
-                            }
-                        })
-                        : child;
-                })
-                : children}
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Input name="firstName" register={register} validation={{ required: { value: true, message: "Min Length required" }, minLength: { value: 10, message: "Min Length 10" } }} />
+            {errors.firstName && <div className="text-sm text-red-500">{errors.firstName.message}</div>}
+            <Input name="lastName" register={register} />
+            <Select name="sex" options={["female", "male"]} register={register} />
+            <button className='btn-primary btn'>Submit</button>
         </form>
     );
 }
 
-export function Input({ register, name, validation, ...rest }) {
-    return <input {...register(name, validation)} {...rest} className="w-full rounded-md px-4 py-3 border border-gray-400  focus:border-primary focus:outline-none" />;
-}
 
-export function Select({ register, options, name, validation, ...rest }) {
-    return (
-        <select {...register(name, validation)} {...rest} className="w-full rounded-md px-4 py-3 border border-gray-400  focus:border-primary focus:outline-none">
-            {options.map((value, i) => (
-                <option key={i} value={value}>{value}</option>
-            ))}
-        </select>
-    );
-}

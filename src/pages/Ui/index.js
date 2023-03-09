@@ -6,7 +6,7 @@ import Switch from '../../components/Switch'
 import Tab from '../../components/Tab'
 import { getData } from '../../utils/fetch'
 import { XMarkIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
-import { Form, Input, Select } from '../../components/Form'
+import { Form } from '../../components/Form'
 import Card from '../../components/Card'
 
 const tableConstants = ({ handleEdit, handleDelete, handleSort }) => {
@@ -57,6 +57,7 @@ const tableConstants = ({ handleEdit, handleDelete, handleSort }) => {
 };
 
 export default function Ui() {
+  // Switch
   const [enabled, setEnabled] = useState(false)
 
   // Modal
@@ -151,13 +152,7 @@ export default function Ui() {
       </Card>
       <Card>
       <h6>Form</h6>
-      <Form onSubmit={(data) => console.log(data)}>
-        <Input name="firstName" validation={{ required: true, minLength: 10 }} />
-        <Input name="lastName" />
-        <Select name="sex" options={["female", "male"]} />
-
-        <button className='btn-primary btn'>Submit</button>
-      </Form>
+      <Form />
       </Card>
       <h6>Table</h6>
       <DataTable
