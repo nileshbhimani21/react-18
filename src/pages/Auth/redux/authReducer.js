@@ -1,21 +1,11 @@
 import { AuthMap } from "./authAction";
-import { persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
 
 const initialState = {
   isLoading: false,
-  user: null,
-  authToken: null,
-  isaAuthenticated: true
+  user: localStorage.getItem("nbTheme") ? JSON.parse(localStorage.getItem("nbTheme")) : null,
 };
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['user', 'authToken']
-}
-
-const authReducer = persistReducer(persistConfig, (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case AuthMap.LOGIN_START: {
       return {
@@ -28,8 +18,6 @@ const authReducer = persistReducer(persistConfig, (state = initialState, action)
         ...state,
         isLoading: false,
         user: action.payload,
-        authToken: action.payload.token,
-        isaAuthenticated: true
       };
     }
     case AuthMap.LOGIN_ERROR: {
@@ -38,8 +26,28 @@ const authReducer = persistReducer(persistConfig, (state = initialState, action)
         isLoading: false,
       };
     }
+    case AuthMap.LOGOUT_START: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case AuthMap.LOGOUT_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        user: null,
+      };
+    }
+    case AuthMap.LOGOUT_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        user: null,
+      };
+    }
     default:
       return { ...state };
   }
-});
+};
 export default authReducer

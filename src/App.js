@@ -1,25 +1,17 @@
-import React, { Suspense } from 'react';
-import { createBrowserHistory} from "history";
-import { Spiner } from './components/Spiner';
-import MainRoutes from './routes/MainRoutes';
-import { ToastContainer } from 'react-toastify'
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
+import React from 'react';
+import { useSelector } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom';
-import './styles/App.scss'
+import PrivateRoute from './routes/PrivateRoute';
+import AuthRoute from './routes/AuthRoute';
+import './styles/custom.scss';
 
-export default function App({ store, persistor }) {
+export default function App({ store }) {
+  const { user } = useSelector(state => state.auth)
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Suspense fallback={<Spiner />}>
-          <Router history={createBrowserHistory()}>
-            <MainRoutes />
-          </Router>
-        </Suspense>
-      </PersistGate>
-      <ToastContainer theme="colored" autoClose={2000} limit={1} />
-    </Provider>
+    <Router>
+      {user !== null ? <PrivateRoute /> : <AuthRoute />}
+    </Router>
   )
 }
+
 

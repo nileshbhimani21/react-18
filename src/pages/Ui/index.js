@@ -1,60 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import DataTable from '../../components/DataTable'
+import React, { useState } from 'react'
 import DropDown from '../../components/DropDown'
 import Modal from '../../components/Modal'
 import Switch from '../../components/Switch'
 import Tab from '../../components/Tab'
-import { getData } from '../../utils/fetch'
-import { XMarkIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
 import { Form } from '../../components/Form'
 import Card from '../../components/Card'
 
-const tableConstants = ({ handleEdit, handleDelete, handleSort }) => {
-  return [
-    {
-      title: <span className="cursor-pointer" onClick={handleSort("id")}>ID</span>,
-      render: (rowData) => {
-        return <span>{rowData.id}</span>;
-      },
-    },
-    {
-      title: 'Thumbnail',
-      render: (rowData) => {
-        return <img src={rowData.thumbnail} className="w-[50px] h-[50px]" alt="" />;
-      },
-    },
-    {
-      title: <span className="cursor-pointer" onClick={handleSort("title")}>Title</span>,
-      render: (rowData) => {
-        return <span>{rowData.title}</span>;
-      },
-    },
-    {
-      title: <span className="cursor-pointer" onClick={handleSort("category")}>Category</span>,
-      render: (rowData) => {
-        return <span>{rowData.category}</span>;
-      },
-    },
-    {
-      title: <span className="cursor-pointer" onClick={handleSort("price")}>Price</span>,
-      render: (rowData) => {
-        return <span>{rowData.price}</span>;
-      },
-    },
-    {
-      title: <span className="cursor-pointer" onClick={handleSort("stock")}>Stock</span>,
-      render: (rowData) => {
-        return <span>{rowData.stock}</span>;
-      },
-    },
-    {
-      title: 'Action',
-      render: (rowData) => {
-        return <div className="flex items-center"><button className='btn btn-primary p-1 mr-1' onClick={handleEdit(rowData)}><PencilSquareIcon className="h-[20px]" /></button><button className='btn btn-danger p-1' onClick={handleDelete(rowData)}><XMarkIcon className="h-[20px]" /></button></div>
-      },
-    },
-  ];
-};
+
 
 export default function Ui() {
   // Switch
@@ -74,47 +26,7 @@ export default function Ui() {
     Recent: 1,
     Popular: 2,
     Trending: 3,
-  }
-
-  // Table data sort, search, pagination
-  const [dataFilter, setDataFilter] = useState({
-    limit: 10,
-    skip: 0,
-    searchText: '',
-    sort: '',
-  })
-  // console.log(dataFilter, 'dataFilter')
-  const [newData, setNewData] = useState({})
-  useEffect(() => {
-    if (dataFilter.searchText !== "") {
-      (async () => {
-        const searchData = await getData({ url: `https://dummyjson.com/products/search?q=${dataFilter.searchText}` })
-        setNewData(searchData)
-      })();
-    } else {
-      (async () => {
-        const searchData = await getData({ url: `https://dummyjson.com/products?limit=${dataFilter.limit}&skip=${dataFilter.skip}` })
-        setNewData(searchData)
-      })();
-    }
-  }, [dataFilter]);
-  const handleEdit = (item) => () => {
-    alert(JSON.stringify(item))
-  }
-  const handleDelete = (item) => () => {
-    alert(JSON.stringify(item))
-  }
-  const handleSort = (item) => () => {
-    setDataFilter({ ...dataFilter, sort: item })
-  }
-  const handleSearch = (e) => {
-    setDataFilter({ ...dataFilter, searchText: e.target.value })
-  }
-  const onBatchChange = (e) => {
-    const newOffset = e.selected * dataFilter?.limit % newData?.total;
-    // console.log(`User requested page number ${e.selected}, which is offset ${newOffset}`);
-    setDataFilter({ ...dataFilter, skip: newOffset });
-  };
+  } 
 
   return (
     <>
@@ -154,15 +66,7 @@ export default function Ui() {
       <h6>Form</h6>
       <Form />
       </Card>
-      <h6>Table</h6>
-      <DataTable
-        cols={tableConstants({ handleEdit, handleDelete, handleSort })}
-        data={newData?.products}
-        total={newData?.total}
-        dataFilter={dataFilter}
-        handleSearch={handleSearch}
-        onBatchChange={onBatchChange}
-      />
+      
     </>
   )
 }

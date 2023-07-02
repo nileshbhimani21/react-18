@@ -1,37 +1,13 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { reduxBatch } from "@manaflair/redux-batch";
-import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
-import { persistStore } from "redux-persist";
+import { createStore, applyMiddleware, compose  } from "redux";
+import thunk from "redux-thunk";
 import { rootReducer } from "./rootReducer";
 
-const middleware = [
-  ...getDefaultMiddleware({
-    immutableCheck: false,
-    serializableCheck: false,
-    thunk: true,
-  }),
-  thunk,
-];
+const composeEnhancers =
+  (process.env.REACT_APP_MODE !== 'production' &&
+    typeof window !== 'undefined' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
 
-if (process.env.NODE_ENV !== "production") {
-  let logger = createLogger({
-    collapsed: true,
-  });
-  middleware.push(logger);
-}
-
-const store = configureStore({
-  reducer: rootReducer,
-  middleware,
-  devTools: process.env.NODE_ENV !== "production",
-  enhancers: [reduxBatch]
-});
-
-/**
- * @see https://github.com/rt2zz/redux-persist#persiststorestore-config-callback
- * @see https://github.com/rt2zz/redux-persist#persistor-object
- */
-export const persistor = persistStore(store);
-
+  const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+ 
 export default store;

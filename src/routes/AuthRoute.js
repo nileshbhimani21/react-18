@@ -1,15 +1,15 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import AuthImg from '../../images/data-points.svg'
-import ForgotPassword from './ForgotPassword'
-import Login from './Login'
-import Register from './Register'
-import ResetPassword from './ResetPassword'
+import AuthImg from '../images/data-points.svg'
+import Login from '../pages/Auth/Login'
+import Register from '../pages/Auth/Register'
+import ForgotPassword from '../pages/Auth/ForgotPassword'
+import ResetPassword from '../pages/Auth/ResetPassword'
 
 export default function AuthRoute() {
   return (
-    <main className="container lg:flex justify-center items-center min-h-screen">
-      <div className='lg:w-50 w-full'>
+    <main className="lg:flex min-h-screen">
+      <div className='lg:w-50 w-full flex justify-center items-center lg:p-8 p-4'>
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
@@ -18,7 +18,7 @@ export default function AuthRoute() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
-      <div className='lg:w-50 w-full'>
+      <div className='lg:w-50 w-full bg-white flex justify-center items-center lg:p-8 p-4'>
         <img src={AuthImg} className='w-full' alt='Login' />
       </div>
     </main>

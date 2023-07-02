@@ -1,5 +1,5 @@
-export const LogoIcon = () => {
-  return (<svg xmlns="http://www.w3.org/2000/svg" width="227.148" height="55" viewBox="0 0 227.148 55">
+export const LogoIcon = ({className}) => {
+  return (<svg className={className} xmlns="http://www.w3.org/2000/svg" width="227.148" height="55" viewBox="0 0 227.148 55">
       <g id="Group_2" data-name="Group 2" transform="translate(-476 -248)">
           <rect id="Rectangle_1" data-name="Rectangle 1" width="67" height="55" transform="translate(476 248)" fill="currentColor" />
           <path id="Path_2" data-name="Path 2" d="M22.061,0h-5.2L7.295-12.246V0h-5.2V-20h5.2L16.86-7.764V-20h5.2ZM41.47-5.684A5.223,5.223,0,0,1,40.2-2.036Q38.35,0,34.57,0H26.25V-20h7.734q5.625,0,5.625,5.215a5.133,5.133,0,0,1-.615,2.622,4.249,4.249,0,0,1-1.582,1.523,4.737,4.737,0,0,1,3.269,1.919A5.745,5.745,0,0,1,41.47-5.684Zm-6.68-8.408a1.741,1.741,0,0,0-1.225-1.8A3.777,3.777,0,0,0,32.4-16.04H31.45v3.911H32.4a2.457,2.457,0,0,0,1.925-.659A1.9,1.9,0,0,0,34.79-14.092ZM36.27-6.035a1.9,1.9,0,0,0-1.8-2.051,14.767,14.767,0,0,0-1.957-.088H31.45v4.219H32.6a5.844,5.844,0,0,0,2.775-.469A1.747,1.747,0,0,0,36.27-6.035Z" transform="translate(488 285)" fill="#fff" />

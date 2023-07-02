@@ -4,11 +4,11 @@ export default function setupAxios(axios, store) {
     axios.interceptors.request.use(
         config => {
             const {
-                auth: { authToken }
+                auth: { user }
             } = store.getState();
 
-            if (authToken) {
-                config.headers.Authorization = authToken;
+            if (user !== null) {
+                config.headers.Authorization = user?.token;
                 config.headers.platform = "web";
             }else{
                 config.headers.platform = "web";
