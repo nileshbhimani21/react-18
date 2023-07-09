@@ -39,7 +39,7 @@ export default function Ui() {
         <br /><br />
         <h6>Modal</h6>
         <button type='button' onClick={openModal} className="btn btn-primary">Modal</button>
-        <Modal isOpen={isOpen} closeModal={closeModal} title="Dialog Title">
+        <Modal width="max-w-md" isOpen={isOpen} closeModal={closeModal} title="Dialog Title">
           <div className="mt-2">
             <p>
               Your payment has been successfully submitted. We’ve sent

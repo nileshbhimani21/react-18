@@ -1,11 +1,8 @@
 import React from "react";
 import Pagination from "./Pagination";
 
-const DataTable = ({ cols, data, total, filter, handleSearch, onBatchChange }) => {
-  return (<>
-    {handleSearch && <div className="flex justify-end">
-      <input type="text" placeholder="Search" name="search" value={filter.search} onChange={handleSearch} />
-    </div>}
+const DataTable = ({ cols, data, total, filter, onBatchChange }) => {
+  return (    
     <div className="overflow-x-auto">
       <table className={`w-full border-separate border-spacing-y-2`}>
         <thead>
@@ -35,7 +32,7 @@ const DataTable = ({ cols, data, total, filter, handleSearch, onBatchChange }) =
         </tfoot>
       </table>
     </div>
-  </>);
+  );
 };
 
 export default DataTable;

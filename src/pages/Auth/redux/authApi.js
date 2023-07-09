@@ -15,6 +15,7 @@ export const loginApi = (req) => {
         data: req
       });
       if (data.status === 200) {
+        toast.success(data.message)
         localStorage.setItem("nbTheme", JSON.stringify(data.data));
         return dispatch(AuthActions.loginSuccess(data.data));
       } else {
@@ -39,6 +40,7 @@ export const logoutApi = () => {
         },
       });
       if (data.status === 200) {
+        toast.success(data.message)
         localStorage.removeItem("nbTheme");
         return dispatch(AuthActions.logoutSuccess());
       } else {

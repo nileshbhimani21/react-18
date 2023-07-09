@@ -1,7 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
 
-export default function Modal({ isOpen, closeModal, title, children }) {
+export default function Modal({ isOpen, closeModal, title, children, width }) {
 
 
     return (
@@ -30,13 +31,16 @@ export default function Modal({ isOpen, closeModal, title, children }) {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                                <Dialog.Title
-                                    as="h3"
-                                    className="text-lg font-medium leading-6 text-gray-900"
-                                >
-                                    {title}
-                                </Dialog.Title>
+                            <Dialog.Panel className={`w-full  transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ${width && width}`}>
+                                <div className='flex items-center justify-between'>
+                                    <Dialog.Title
+                                        as="h3"
+                                        className="text-lg font-medium leading-6 text-gray-900"
+                                    >
+                                        {title}
+                                    </Dialog.Title>
+                                    <button className='btn btn-danger p-1' onClick={closeModal}><XMarkIcon className="h-[20px]" /></button>
+                                </div>
                                 {children}
                             </Dialog.Panel>
                         </Transition.Child>

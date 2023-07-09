@@ -25,7 +25,25 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
       };
-    }    
+    }
+    case UserMap.UPDATE_USER_START: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case UserMap.UPDATE_USER_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+    case UserMap.UPDATE_USER_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }        
     default:
       return { ...state };
   }
