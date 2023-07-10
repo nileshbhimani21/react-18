@@ -15,7 +15,7 @@ export const usersApi = (filter) => {
         data: filter
       });
       if (data.status === 200) {
-        toast.success(data.message)
+        // toast.success(data.message)
         return dispatch(UserActions.getUsersSuccess(data.data));
       } else {
         toast.error(data.message)

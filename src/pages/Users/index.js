@@ -102,7 +102,7 @@ export default function Users() {
         {isLoading && <Spiner />}
         <div className="flex justify-between">
           <button className='btn-primary btn flex' onClick={() => setUserModal(true)}><PlusIcon className='w-6 h-6 me-2' /> Add User</button>
-          <input type="text" placeholder="Search" name="search" value={filter.search} onChange={handleSearch} />
+          <input type="search" placeholder="Search" name="search" value={filter.search} onChange={handleSearch} />
         </div>
         {userModal && <UserModal isOpen={userModal}
           closeModal={() => {
