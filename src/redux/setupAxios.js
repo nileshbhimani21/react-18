@@ -10,7 +10,7 @@ export default function setupAxios(axios, store) {
             if (user !== null) {
                 config.headers.Authorization = user?.token;
                 config.headers.platform = "web";
-            }else{
+            } else {
                 config.headers.platform = "web";
             }
 
@@ -20,16 +20,20 @@ export default function setupAxios(axios, store) {
     );
     axios.interceptors.response.use(
         response => {
+            if (response.data.status === 401) {
+                localStorage.removeItem("nbTheme");      
+                window.location.pathname = "/"          
+            }
             return response.data
         },
-        err => {
-                if(err.response.data.code === 401){
-                    toast.error(err.response.data.message)
-                    setTimeout(() => {
-                        localStorage.clear();
-                        window.location.pathname = "/"
-                    }, 3000);
-                }
+        err => {            
+            if (err.response.data.status === 401) {
+                toast.error(err.response.data.message)
+                setTimeout(() => {
+                    localStorage.removeItem("nbTheme");           
+                    window.location.pathname = "/"
+                }, 3000);
+            }
             return err.response.data
         }
     );

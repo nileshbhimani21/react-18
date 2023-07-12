@@ -101,3 +101,27 @@ export const deleteUsersApi = (id) => {
     }
   };
 };
+export const userRolesApi = (filter) => {
+  return async (dispatch) => {
+    try {
+      dispatch(UserActions.getUserRolesStart());
+      const data = await axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_BACKEND_URL}userroles`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: filter
+      });
+      if (data.status === 200) {
+        return dispatch(UserActions.getUserRolesSuccess(data.data));
+      } else {
+        toast.error(data.message)
+        return dispatch(UserActions.getUserRolesError(data.message));
+      }
+    } catch (error) {
+      toast.error(error)
+      return dispatch(UserActions.getUserRolesError(error));
+    }
+  };
+};

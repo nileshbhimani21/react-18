@@ -5,6 +5,9 @@ export const UserMap = {
   UPDATE_USER_START: "UPDATE_USER_START",
   UPDATE_USER_SUCCESS: "UPDATE_USER_SUCCESS",
   UPDATE_USER_ERROR: "UPDATE_USER_ERROR", 
+  GET_USERS_ROLES_START: "GET_USERS_ROLES_START",
+  GET_USERS_ROLES_SUCCESS: "GET_USERS_ROLES_SUCCESS",
+  GET_USERS_ROLES_ERROR: "GET_USERS_ROLES_ERROR", 
 };
 
 export const UserActions = {
@@ -14,4 +17,7 @@ export const UserActions = {
   updateUserStart: () => ({ type: UserMap.UPDATE_USER_START }),
   updateUserSuccess: (data) => ({ type: UserMap.UPDATE_USER_SUCCESS, payload: data }),
   updateUserError: (errors) => ({ type: UserMap.UPDATE_USER_ERROR, payload: errors }), 
+  getUserRolesStart: () => ({ type: UserMap.GET_USERS_ROLES_START }),
+  getUserRolesSuccess: (data) => ({ type: UserMap.GET_USERS_ROLES_SUCCESS, payload: data }),
+  getUserRolesError: (errors) => ({ type: UserMap.GET_USERS_ROLES_ERROR, payload: errors }), 
 };

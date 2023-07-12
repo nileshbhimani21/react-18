@@ -3,6 +3,7 @@ import { UserMap } from "./userAction";
 const initialState = {
   isLoading: false,
   users: null,
+  userRoles : []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -39,6 +40,25 @@ const userReducer = (state = initialState, action) => {
       };
     }
     case UserMap.UPDATE_USER_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }        
+    case UserMap.GET_USERS_ROLES_START: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case UserMap.GET_USERS_ROLES_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        userRoles: action.payload,
+      };
+    }
+    case UserMap.GET_USERS_ROLES_ERROR: {
       return {
         ...state,
         isLoading: false,

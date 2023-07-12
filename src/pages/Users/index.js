@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteUsersApi, usersApi } from './redux/userApi'
 import DataTable from '../../components/DataTable'
-import { XMarkIcon, PencilSquareIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon, PencilSquareIcon, PlusIcon, UserPlusIcon } from '@heroicons/react/24/outline'
 import { Spiner } from '../../components/Spiner'
 import Card from '../../components/Card'
 import UserModal from './UserModal'
 import SortArrow from '../../utils/SortArrow'
+import UserRoleModal from './UserRoleModal'
 
 export default function Users() {
   const dispatch = useDispatch()
   const { users, isLoading } = useSelector(state => state.user)
+  const { user } = useSelector(state => state.auth)
   const [userModal, setUserModal] = useState(false)
+  const [userRoleModal, setUserRoleModal] = useState(false)
   const [editData, setEditData] = useState(null)
   const [filter, setFilter] = useState({
     limit: 10,
@@ -21,7 +24,7 @@ export default function Users() {
     search: ''
   })
 
-  const tableConstants = ({ handleEdit, handleDelete, handleSort }) => {
+  const column = () => {
     return [
       {
         title: <span className="cursor-pointer">ID</span>,
@@ -30,7 +33,7 @@ export default function Users() {
         },
       },
       {
-        title: <span className="cursor-pointer flex items-center" onClick={() => handleSort("firstName")}>Fullname {SortArrow(filter, "firstName")}</span>,
+        title: <span className="cursor-pointer flex items-center" onClick={() => handleSort("firstName")}>Full Name {SortArrow(filter, "firstName")}</span>,
         render: (rowData) => {
           return <span>{rowData.firstName} {rowData.lastName}</span>;
         },
@@ -56,7 +59,7 @@ export default function Users() {
       {
         title: 'Action',
         render: (rowData) => {
-          return <div className="flex items-center"><button className='btn btn-primary p-1 mr-1' onClick={handleEdit(rowData)}><PencilSquareIcon className="h-[20px]" /></button><button className='btn btn-danger p-1' onClick={handleDelete(rowData)}><XMarkIcon className="h-[20px]" /></button></div>
+          return <div className="flex items-center">{user && user?.userType === "admin" && <button className='btn btn-primary p-1 mr-1' onClick={handleRole(rowData)}><UserPlusIcon className="h-[20px]" /></button>}{user && user?.roles?.indexOf("userAdd") > -1 && <button className='btn btn-primary p-1 mr-1' onClick={handleEdit(rowData)}><PencilSquareIcon className="h-[20px]" /></button>}{user && user?.roles?.indexOf("userDelete") > -1 && <button className='btn btn-danger p-1' onClick={handleDelete(rowData)}><XMarkIcon className="h-[20px]" /></button>}</div>
         },
       },
     ];
@@ -69,6 +72,10 @@ export default function Users() {
   const handleEdit = (item) => () => {
     setEditData(item)
     setUserModal(true)
+  }
+  const handleRole = (item) => () => {
+    setEditData(item)
+    setUserRoleModal(true)
   }
   const handleDelete = (item) => () => {
     dispatch(deleteUsersApi(item?._id)).then((res) => {
@@ -101,7 +108,7 @@ export default function Users() {
       <Card>
         {isLoading && <Spiner />}
         <div className="flex justify-between">
-          <button className='btn-primary btn flex' onClick={() => setUserModal(true)}><PlusIcon className='w-6 h-6 me-2' /> Add User</button>
+          {user && user?.roles?.indexOf("userAdd") > -1 ? <button className='btn-primary btn flex' onClick={() => setUserModal(true)}><PlusIcon className='w-6 h-6 me-2' /> Add User</button>:<div> </div>}
           <input type="search" placeholder="Search" name="search" value={filter.search} onChange={handleSearch} />
         </div>
         {userModal && <UserModal isOpen={userModal}
@@ -111,8 +118,15 @@ export default function Users() {
           }
           }
           filter={filter} editData={editData} />}
+        {userRoleModal && <UserRoleModal isOpen={userRoleModal}
+          closeModal={() => {
+            setUserRoleModal(false)
+            setEditData(null)
+          }
+          }
+          filter={filter} editData={editData} />}
         <DataTable
-          cols={tableConstants({ handleEdit, handleDelete, handleSort })}
+          cols={column()}
           data={users !== null && users.users.map((x, i) => { return { ...x, id: i + filter?.skip + 1 } })}
           total={users !== null && users.total}
           filter={filter}

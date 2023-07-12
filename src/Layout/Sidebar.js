@@ -4,6 +4,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { LogoIcon } from "../components/Icons";
 import { Squares2X2Icon, UsersIcon } from '@heroicons/react/24/outline'
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const perfectScrollbarOptions = {
     wheelSpeed: 2,
@@ -12,6 +13,7 @@ const perfectScrollbarOptions = {
 
 export default function SidebarMenu({ collapsed, setCollapsed }) {
     const location = useLocation();
+    const { user } = useSelector(state => state.auth)
     return (
         <React.Fragment>
             <Sidebar className="bg-white" toggled={collapsed} collapsed={collapsed} onBackdropClick={() => setCollapsed(false)} breakPoint="md" >
@@ -24,7 +26,7 @@ export default function SidebarMenu({ collapsed, setCollapsed }) {
                 >
                     <Menu>
                         <MenuItem className={location.pathname === "/" && "bg-primary text-white"} active={location.pathname === "/"} onClick={() => setCollapsed(false)} component={<Link to="/" />} icon={<Squares2X2Icon className="h-6 w-6 inline-flex mr-2" />}>Dashboard</MenuItem>
-                        <MenuItem className={location.pathname === "/users" && "bg-primary text-white"} active={location.pathname === "/users"} onClick={() => setCollapsed(false)} component={<Link to="/users" />} icon={<UsersIcon className="h-6 w-6 inline-flex mr-2" />}>Users</MenuItem>
+                        {user && user?.roles?.indexOf("userList") > -1 && <MenuItem className={location.pathname === "/users" && "bg-primary text-white"} active={location.pathname === "/users"} onClick={() => setCollapsed(false)} component={<Link to="/users" />} icon={<UsersIcon className="h-6 w-6 inline-flex mr-2" />}>Users</MenuItem>}
                         <MenuItem className={location.pathname === "/ui" && "bg-primary text-white"} active={location.pathname === "/ui"} onClick={() => setCollapsed(false)} component={<Link to="/ui" />} icon={<UsersIcon className="h-6 w-6 inline-flex mr-2" />}>Ui</MenuItem>
                     </Menu>
                 </PerfectScrollbar>

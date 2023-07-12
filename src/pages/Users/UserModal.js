@@ -17,7 +17,7 @@ export default function UserModal({ isOpen, closeModal, filter, editData }) {
             email: "",
             status: true,
             password: "",
-            confirmPassword: ""
+            confirmPassword: "",
         }
     });
     const onSubmit = (formData) => {
@@ -90,6 +90,7 @@ export default function UserModal({ isOpen, closeModal, filter, editData }) {
                             {errors.confirmPassword && errors.confirmPassword.type === "required" && <div className="text-sm text-red-500">Confirm Password is required</div>}
                             {errors.confirmPassword && errors.confirmPassword.type === "validate" && <div className="text-sm text-red-500">Passwords do not match</div>}
                         </div></>}
+                        
                     <div className='mb-5 flex items-center'>
                         <label className='me-2'>Status: </label>
                         <Controller
@@ -104,7 +105,7 @@ export default function UserModal({ isOpen, closeModal, filter, editData }) {
                 <div className="mt-4 flex items-center justify-end">
                     <button
                         type="button"
-                        className="me-3 btn btn-secondary"
+                        className="me-3 btn btn-primary-outline"
                         onClick={() => {
                             closeModal()
                             reset()
