@@ -14,7 +14,7 @@ export default function AuthRoute() {
           <Route exact path="/" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/forgot-password" element={<ForgotPassword />} />
-          <Route exact path="/reset-password" element={<ResetPassword />} />
+          <Route exact path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

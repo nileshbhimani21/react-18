@@ -43,7 +43,6 @@ export default function Login() {
           Not a Member yet?
           <Link to="/register" className='text-primary ms-2 text-sm'>Sign up</Link>
         </div>
-
       </Card>
     </div>
   )

@@ -46,6 +46,44 @@ const authReducer = (state = initialState, action) => {
         user: null,
       };
     }
+    case AuthMap.FORGOT_PASSWORD_START: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case AuthMap.FORGOT_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+    case AuthMap.FORGOT_PASSWORD_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        user: null,
+      };
+    }
+    case AuthMap.RESET_PASSWORD_START: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case AuthMap.RESET_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+    case AuthMap.RESET_PASSWORD_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        user: null,
+      };
+    }
     default:
       return { ...state };
   }
