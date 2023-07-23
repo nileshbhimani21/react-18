@@ -1,5 +1,5 @@
 export function Input({ register, name, validation, ...rest }) {
-    return <input {...register(name, validation)} {...rest} className="w-full rounded-md px-4 py-3 border border-gray-300  focus:border-primary focus:outline-none" />;
+    return <input {...register(name, validation)} {...rest} className="w-full rounded-md px-4 py-2 border border-gray-300  focus:border-primary focus:outline-none" />;
 }
 
 export function Select({ register, options, name, validation, ...rest }) {

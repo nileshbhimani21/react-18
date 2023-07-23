@@ -21,21 +21,23 @@ export default function Login() {
   return (
     <div className='max-w-[400px] w-full'>
       <Card>
-      <div className="text-center text-primary">
-                    <LogoIcon className="w-28 h-7 mx-auto mb-5"/>
-                </div>
+        <div className="text-center text-primary">
+          <LogoIcon className="w-28 h-7 mx-auto mb-5" />
+        </div>
         <h4 className='text-center mb-5'>Sign In</h4>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='mb-5'>
-            <Input name="email" placeholder="Email" register={register} validation={{ required: true, pattern: emailRegex }} />
-            {errors.email && errors.email.type === "required" && <div className="text-sm text-red-500">Email is required</div>}
-            {errors.email && errors.email.type === "pattern" && <div className="text-sm text-red-500">Email is not valid</div>}
-          </div>
-          <div className='mb-5'>
-            <Input type="password" placeholder="Password" name="password" register={register} validation={{ required: true, pattern: passwordRegex }} />
-            <Link to="/forgot-password" className='text-primary text-sm float-right'>Forgot Password ?</Link>
-            {errors.password && errors.password.type === "required" && <div className="text-sm text-red-500">Password is required</div>}
-            {errors.password && errors.password.type === "pattern" && <div className="text-sm text-red-500">Password At least one digit, one lowercase character,one uppercase character, one special character, 8 characters in length, but no more than 32.</div>}
+          <div className="grid grid-cols-1 gap-4">
+            <div className='mb-1'>
+              <Input name="email" placeholder="Email" register={register} validation={{ required: true, pattern: emailRegex }} />
+              {errors.email && errors.email.type === "required" && <div className="text-sm text-red-500">Email is required</div>}
+              {errors.email && errors.email.type === "pattern" && <div className="text-sm text-red-500">Email is not valid</div>}
+            </div>
+            <div className='mb-1'>
+              <Input type="password" placeholder="Password" name="password" register={register} validation={{ required: true, pattern: passwordRegex }} />
+              <Link to="/forgot-password" className='text-primary text-sm float-right'>Forgot Password ?</Link>
+              {errors.password && errors.password.type === "required" && <div className="text-sm text-red-500">Password is required</div>}
+              {errors.password && errors.password.type === "pattern" && <div className="text-sm text-red-500">Password At least one digit, one lowercase character,one uppercase character, one special character, 8 characters in length, but no more than 32.</div>}
+            </div>
           </div>
           <button className='btn-primary btn w-full mt-5'>Sign In</button>
         </form>

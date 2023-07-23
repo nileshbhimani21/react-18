@@ -59,7 +59,7 @@ export default function Users() {
       {
         title: 'Action',
         render: (rowData) => {
-          return <div className="flex items-center">{user && user?.userType === "admin" && <button className='btn btn-primary p-1 mr-1' onClick={handleRole(rowData)}><UserPlusIcon className="h-[20px]" /></button>}{user && user?.roles?.indexOf("userAdd") > -1 && <button className='btn btn-primary p-1 mr-1' onClick={handleEdit(rowData)}><PencilSquareIcon className="h-[20px]" /></button>}{user && user?.roles?.indexOf("userDelete") > -1 && <button className='btn btn-danger p-1' onClick={handleDelete(rowData)}><XMarkIcon className="h-[20px]" /></button>}</div>
+          return <div className="flex items-center">{user && (user?.userType === "admin" || user?.userType === "user") && <button className='btn btn-primary p-1 mr-1' onClick={handleRole(rowData)}><UserPlusIcon className="h-[20px]" /></button>}{user && user?.roles?.indexOf("userAdd") > -1 && <button className='btn btn-primary p-1 mr-1' onClick={handleEdit(rowData)}><PencilSquareIcon className="h-[20px]" /></button>}{user && user?.roles?.indexOf("userDelete") > -1 && <button className='btn btn-danger p-1' onClick={handleDelete(rowData)}><XMarkIcon className="h-[20px]" /></button>}</div>
         },
       },
     ];

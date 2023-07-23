@@ -27,7 +27,7 @@ export default function ForgotPassword() {
                 </div>
         <h4 className='text-center mb-5'>Forgot password</h4>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='mb-5'>
+          <div className='mb-1'>
             <Input name="email" placeholder="Email" register={register} validation={{ required: true, pattern: emailRegex }} />
             {errors.email && errors.email.type === "required" && <div className="text-sm text-red-500">Email is required</div>}
             {errors.email && errors.email.type === "pattern" && <div className="text-sm text-red-500">Email is not valid</div>}
@@ -36,7 +36,7 @@ export default function ForgotPassword() {
           <button className='btn-primary btn w-full mt-5'>Submit</button>
         </form>
         <div className='flex justify-center items-center mt-5'>          
-          <Link to="/" className='text-primary text-sm'>Login</Link>
+          <Link to="/" className='text-primary text-sm'>Sign In</Link>
         </div>
       </Card>
     </div>
