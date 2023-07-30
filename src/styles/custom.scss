@@ -75,3 +75,15 @@ pagination css
 button[disabled], html input[disabled] {
   color: lightgray;
 }
+.profilepPic{
+  @apply w-[150px] h-[150px] rounded-full relative overflow-hidden block; 
+  img {
+    @apply w-full h-full rounded-full z-0;
+  }
+  svg {
+    @apply border w-full h-full rounded-full z-0;
+  }
+  input{
+    @apply opacity-0 absolute w-[200%] h-full top-0 left-[-100%] z-10 cursor-pointer
+  }
+}

@@ -104,3 +104,29 @@ export const resetPasswordApi = (req, token) => {
     }
   };
 };
+export const updateProfileApi = (req, id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(AuthActions.loginStart());
+      const data = await axios({
+        method: "PATCH",
+        url: `${process.env.REACT_APP_BACKEND_URL}updateProfile/${id}`,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: req
+      });
+      if (data.status === 200) {
+        toast.success(data.message)
+        localStorage.setItem("nbTheme", JSON.stringify(data.data));
+        return dispatch(AuthActions.loginSuccess(data.data));
+      } else {
+        toast.error(data.message)
+        dispatch(AuthActions.loginError(data.message));
+      }
+    } catch (error) {
+      toast.error(error.message)
+      return dispatch(AuthActions.loginError(error.message));
+    }
+  };
+};

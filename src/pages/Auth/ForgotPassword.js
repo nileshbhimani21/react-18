@@ -13,8 +13,7 @@ export default function ForgotPassword() {
   const { handleSubmit, register, formState: { errors }, reset } = useForm();
 
   const onSubmit = (formData) => {
-    if (Object.keys(errors).length === 0) {
-      console.log(formData)
+    if (Object.keys(errors).length === 0) {      
       dispatch(forgotPasswordApi(formData))
       reset()
     }
